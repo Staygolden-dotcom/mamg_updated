@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAMG — Me And My Guys | A Day Rave, 10 December</title>
+<meta name="description" content="Me And My Guys: A Day Rave. 10 December. Early bird tickets are ₦3,500 on RIDIM. Bring your crew.">
+<meta property="og:title" content="Me And My Guys: A Day Rave — 10 December">
+<meta property="og:description" content="Early bird tickets ₦3,500 on RIDIM. Bring your crew.">
+<meta property="og:image" content="images/dec10-poster.jpg">
+<link rel="icon" type="image/png" href="images/favicon.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+<style>
+  /* ============ TOKENS ============ */
+  :root{
+    --bg:#09030f;
+    --bg-2:#10061d;
+    --panel:#160a28;
+    --line:rgba(255,255,255,.12);
+    --text:#f6f1ff;
+    --muted:#a99cc4;
+    --violet:#9b4dff;
+    --violet-deep:#5b1fd1;
+    --magenta:#e63fd9;
+    --paper:#ece6f7;
+    --ink:#0b0415;
+    --display:'Anton', 'Impact', sans-serif;
+    --body:'Space Grotesk', system-ui, sans-serif;
+    --mono:'Space Mono', ui-monospace, monospace;
+    --ease:cubic-bezier(.19,1,.22,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;scroll-padding-top:88px;}
+  body{background:var(--bg);color:var(--text);font-family:var(--body);line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+  img,video{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;}
+  ::selection{background:var(--magenta);color:#fff;}
+  :focus-visible{outline:2px solid var(--magenta);outline-offset:3px;}
+
+  .wrap{max-width:1240px;margin:0 auto;padding:0 clamp(20px,4.5vw,48px);}
+  .mono{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--magenta);display:flex;align-items:center;gap:10px;}
+  .eyebrow::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--magenta);}
+  h1,h2,h3{font-family:var(--display);font-weight:400;text-transform:uppercase;line-height:.95;letter-spacing:.005em;}
+  h2{font-size:clamp(44px,7vw,92px);margin-top:18px;}
+  .lead{color:var(--muted);font-size:clamp(15px,1.4vw,17px);max-width:46ch;}
+
+  /* buttons */
+  .btn{display:inline-flex;align-items:center;justify-content:space-between;gap:28px;padding:16px 20px;font-weight:600;font-size:15px;border:1px solid var(--line);transition:background .25s,color .25s,border-color .25s;}
+  .btn .arr{font-family:var(--mono);transition:transform .25s var(--ease);}
+  .btn:hover .arr{transform:translate(3px,-3px);}
+  .btn-solid{background:var(--magenta);color:var(--ink);border-color:var(--magenta);}
+  .btn-solid:hover{background:#ff6cf0;border-color:#ff6cf0;}
+  .btn-line:hover{border-color:var(--text);}
+  .btn-dark{background:var(--ink);color:#fff;border-color:var(--ink);}
+  .btn-dark:hover{background:#25103f;}
+
+  /* paint-swipe labels, borrowed from the poster */
+  .swipe{display:inline-block;transform:rotate(-2deg);padding:.16em .7em .1em .55em;
+    clip-path:polygon(1% 14%,5% 2%,38% 8%,72% 0,99% 9%,100% 52%,97% 100%,58% 93%,22% 100%,3% 91%,0 52%);}
+  .swipe span{display:inline-block;transform:skewX(-9deg);}
+  .swipe.v{background:var(--violet);}
+  .swipe.m{background:var(--magenta);}
+
+  /* ============ SPLASH ============ */
+  #splash{position:fixed;inset:0;z-index:9999;background:radial-gradient(120% 120% at 50% 30%,#241046 0%,#09030f 70%);display:flex;align-items:center;justify-content:center;transition:opacity .7s var(--ease),visibility .7s var(--ease);}
+  #splash.hide{opacity:0;visibility:hidden;pointer-events:none;}
+  .splash-mark{display:flex;flex-direction:column;align-items:center;gap:22px;animation:pulse 1.6s ease-in-out infinite;}
+  .splash-mark img{height:clamp(100px,15vw,150px);width:auto;}
+  .splash-bar{width:180px;height:2px;background:var(--line);position:relative;overflow:hidden;}
+  .splash-bar::after{content:'';position:absolute;top:0;bottom:0;left:-40%;width:40%;background:linear-gradient(90deg,transparent,var(--magenta),var(--violet),transparent);animation:load 3s var(--ease) forwards;}
+  @keyframes load{to{left:100%;}}
+  @keyframes pulse{50%{transform:scale(1.035);}}
+
+  /* ============ NAV ============ */
+  header{position:fixed;top:0;left:0;right:0;z-index:500;border-bottom:1px solid transparent;transition:background .3s,border-color .3s,backdrop-filter .3s;}
+  header.scrolled{background:rgba(9,3,15,.78);backdrop-filter:blur(14px);border-color:var(--line);}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:88px;gap:24px;}
+  .nav-logo img{height:58px;width:auto;}
+  .hero-logo{height:clamp(96px,9vw,128px);width:auto;margin-bottom:22px;}
+  .nav-links{display:flex;gap:34px;font-size:14px;font-weight:500;}
+  .nav-links a{opacity:.85;transition:opacity .2s;}
+  .nav-links a:hover{opacity:1;}
+  .nav .btn{padding:11px 16px;font-size:14px;gap:16px;}
+  .menu-btn{display:none;width:44px;height:44px;align-items:center;justify-content:center;}
+  .menu-btn svg{width:24px;height:24px;}
+
+  /* ============ HERO ============ */
+  #hero{position:relative;min-height:100svh;display:flex;align-items:center;padding:130px 0 120px;overflow:hidden;isolation:isolate;}
+  .hero-bg{position:absolute;inset:0;z-index:-2;}
+  .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 30%;}
+  #hero::before{content:'';position:absolute;inset:0;z-index:-1;
+    background:linear-gradient(90deg,rgba(9,3,15,.94) 0%,rgba(9,3,15,.7) 48%,rgba(9,3,15,.55) 100%),
+               linear-gradient(0deg,var(--bg) 0%,transparent 28%);}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(24px,5vw,72px);align-items:center;}
+  .hero-tag{color:var(--text);display:flex;align-items:center;gap:10px;margin-bottom:26px;}
+  .hero-tag i{width:7px;height:7px;border-radius:50%;background:var(--magenta);display:inline-block;}
+  #hero h1{font-size:clamp(68px,12.4vw,176px);line-height:.88;}
+  .hero-swipes{display:flex;flex-wrap:wrap;gap:6px 18px;margin:30px 0 30px -6px;font-family:var(--display);text-transform:uppercase;font-size:clamp(24px,3.2vw,42px);line-height:1;}
+  .hero-swipes .swipe{animation:wipe .9s var(--ease) both;}
+  .hero-swipes .swipe:nth-child(2){animation-delay:.18s;}
+  @keyframes wipe{from{clip-path:polygon(0 14%,0 2%,0 8%,0 0,0 9%,0 52%,0 100%,0 93%,0 100%,0 91%,0 52%);}}
+  #hero .lead{margin-bottom:34px;}
+  .hero-ctas{display:flex;flex-wrap:wrap;gap:12px;}
+  .hero-ctas .btn{min-width:230px;}
+  .hero-poster{justify-self:end;width:min(100%,420px);position:relative;}
+  .hero-poster img{width:100%;height:auto;border-radius:14px;transform:rotate(2deg);box-shadow:0 40px 90px -20px rgba(155,77,255,.55),0 0 0 1px rgba(255,255,255,.14);}
+  .hero-foot{position:absolute;left:0;right:0;bottom:30px;}
+  .hero-foot .wrap{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;color:var(--muted);}
+  .hero-foot a{color:var(--text);display:block;text-align:right;}
+  .hero-foot small{display:block;color:var(--muted);font-size:10px;}
+
+  /* accent strip */
+  /* .strip{background:var(--magenta);color:var(--ink);}
+  .strip .wrap{display:flex;justify-content:space-between;gap:16px 40px;flex-wrap:wrap;padding-top:18px;padding-bottom:18px;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;}
+  .strip span{display:inline-flex;align-items:center;gap:10px;}
+  .strip span::before{content:'';width:12px;height:12px;background:var(--ink);transform:rotate(45deg);} */
+
+  .strip{
+  background:var(--magenta);
+  color:var(--ink);
+  overflow:hidden;
+  padding:18px 0;
+}
+.strip-track{
+  display:flex;
+  width:max-content;
+  animation:strip-scroll 28s linear infinite; /* change 28s to speed up or slow down */
+}
+.strip:hover .strip-track{animation-play-state:paused;}
+.strip-set{
+  display:flex;
+  align-items:center;
+  gap:48px;
+  padding-right:48px;
+}
+.strip-set span{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  white-space:nowrap;
+  font-family:var(--mono);
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+.strip-set span::before{
+  content:'';
+  width:12px;
+  height:12px;
+  background:var(--ink);
+  transform:rotate(45deg);
+}
+@keyframes strip-scroll{to{transform:translateX(-50%);}}
+  /* ============ EVENT ============ */
+  section{position:relative;}
+  .sec{padding:clamp(72px,10vw,130px) 0;}
+  .head-row{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;margin-bottom:48px;}
+  .event-card{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);background:var(--panel);}
+  .date-panel{position:relative;background:linear-gradient(155deg,var(--violet-deep),#2a0c6b 55%,#1a0745);padding:clamp(28px,4vw,52px);display:flex;flex-direction:column;justify-content:space-between;gap:36px;min-height:460px;overflow:hidden;}
+  .date-panel .tagline{display:inline-block;background:var(--ink);color:#fff;padding:7px 10px;align-self:flex-start;}
+  .big-date{font-family:var(--display);line-height:.8;text-transform:uppercase;}
+  .big-date b{display:block;font-weight:400;font-size:clamp(150px,22vw,300px);letter-spacing:-.01em;}
+  .big-date span{display:block;font-size:clamp(30px,4vw,54px);margin-top:10px;}
+  .count-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:420px;}
+  .count-cell{background:rgba(9,3,15,.55);padding:12px 8px 10px;text-align:center;border:1px solid rgba(255,255,255,.14);}
+  .count-num{font-family:var(--display);font-size:clamp(28px,3.4vw,40px);line-height:1;display:block;font-variant-numeric:tabular-nums;}
+  .count-label{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#cdbdf0;}
+  .event-info{padding:clamp(28px,4vw,52px);display:flex;flex-direction:column;justify-content:center;gap:26px;}
+  .event-info h3{font-size:clamp(40px,5vw,68px);}
+  .event-info p{color:var(--muted);max-width:44ch;}
+  .facts{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);}
+  .facts div{padding:16px 0;border-bottom:1px solid var(--line);}
+  .facts dt{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);}
+  .facts dd{font-family:var(--mono);font-size:13px;letter-spacing:.06em;text-transform:uppercase;margin-top:4px;}
+  .price-pill{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;}
+  .price-pill strong{font-family:var(--display);font-weight:400;font-size:clamp(44px,5vw,64px);line-height:1;}
+  .event-info .btn{align-self:flex-start;min-width:260px;}
+
+  /* ============ ABOUT ============ */
+  #about{background:var(--bg-2);}
+  .about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(32px,6vw,90px);align-items:start;}
+  .about-grid .lead{margin-top:26px;}
+  .rows li{display:grid;grid-template-columns:1fr auto;gap:6px 20px;align-items:center;padding:26px 0;border-top:1px solid var(--line);}
+  .rows li:last-child{border-bottom:1px solid var(--line);}
+  .rows h3{font-size:clamp(32px,4vw,52px);}
+  .rows p{grid-column:1;color:var(--muted);font-size:15px;}
+  .rows .tick{grid-row:1 / span 2;grid-column:2;font-family:var(--mono);color:var(--magenta);font-size:22px;}
+
+  /* ============ RECAP ============ */
+  .past{display:grid;grid-template-columns:.8fr 1.2fr;border:1px solid var(--line);margin-bottom:clamp(64px,8vw,110px);}
+  .past-img{position:relative;background:#1a0745;display:flex;align-items:center;justify-content:center;padding:clamp(24px,4vw,48px);}
+  .past-img img{width:min(100%,380px);border-radius:10px;box-shadow:0 30px 70px -20px rgba(0,0,0,.7);}
+  .past-img .mono{position:absolute;top:18px;left:18px;background:var(--magenta);color:var(--ink);padding:6px 10px;font-weight:700;}
+  .past-info{padding:clamp(28px,4vw,56px);display:flex;flex-direction:column;justify-content:center;gap:26px;background:var(--panel);}
+  .past-info h3{font-size:clamp(42px,5.4vw,76px);}
+  .past-info p{color:var(--muted);max-width:50ch;}
+  .sub-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:30px;}
+  .sub-head h3{font-size:clamp(34px,4.6vw,60px);}
+
+  /* coverflow */
+  .cf-stage{position:relative;height:clamp(360px,44vw,470px);display:flex;align-items:center;justify-content:center;perspective:1000px;touch-action:pan-y;user-select:none;overflow:hidden;}
+  .cf-item{position:absolute;width:clamp(210px,24vw,290px);height:clamp(300px,33vw,400px);border-radius:12px;overflow:hidden;border:1px solid var(--line);box-shadow:0 24px 60px -22px rgba(0,0,0,.7);transition:transform .6s var(--ease),opacity .6s var(--ease),filter .6s var(--ease);cursor:pointer;will-change:transform;}
+  .cf-item img{width:100%;height:100%;object-fit:cover;pointer-events:none;}
+  .cf-item.is-active{cursor:default;box-shadow:0 30px 70px -18px rgba(0,0,0,.8),0 0 0 2px var(--magenta);}
+  .cf-nav{display:flex;align-items:center;justify-content:center;gap:22px;margin-top:26px;}
+  .cf-arrow{width:46px;height:46px;border:1px solid var(--line);display:grid;place-items:center;transition:background .2s,color .2s,border-color .2s;}
+  .cf-arrow:hover{background:var(--magenta);border-color:var(--magenta);color:var(--ink);}
+  .cf-arrow svg{width:18px;height:18px;}
+  .cf-dots{display:flex;gap:8px;}
+  .cf-dot{width:7px;height:7px;border-radius:50%;background:var(--line);cursor:pointer;transition:width .3s,background .3s;}
+  .cf-dot.active{background:var(--magenta);width:22px;border-radius:4px;}
+
+  /* experiences scroller */
+  .exp-block{margin-top:clamp(64px,8vw,110px);}
+  .exp-track{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(220px,260px);gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:16px;scrollbar-color:var(--violet) transparent;}
+  .exp-card{scroll-snap-align:start;}
+  .exp-card img{width:100%;aspect-ratio:4/5;object-fit:cover;border:1px solid var(--line);}
+  .exp-card h4{font-family:var(--display);font-weight:400;font-size:26px;text-transform:uppercase;margin-top:12px;line-height:1;}
+
+  /* reel */
+  .reel-block{margin-top:clamp(64px,8vw,110px);}
+  .reel{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:900px;}
+  .reel video{width:100%;aspect-ratio:9/16;object-fit:cover;background:#000;border:1px solid var(--line);}
+
+  /* ============ PAPER BAND ============ */
+   #paper{background:var(--paper);color:var(--ink);}
+  .paper-grid{display:grid;grid-template-columns:1.4fr .6fr;gap:clamp(32px,6vw,90px);align-items:end;}
+  #paper .eyebrow{color:var(--violet-deep);}
+  #paper .eyebrow::before{background:var(--violet-deep);}
+  .quote{font-family:var(--display);text-transform:uppercase;font-size:clamp(36px,5.4vw,76px);line-height:.98;margin:22px 0;}
+  .quote-by{font-size:14px;color:#4b3a6b;}
+  .stat{margin-bottom:26px;}
+  .stat b{display:block;font-family:var(--display);font-weight:400;font-size:clamp(52px,6vw,80px);line-height:1;}
+  .stat span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#4b3a6b;}
+  /*.partners{margin-top:clamp(40px,6vw,72px);padding-top:28px;border-top:1px solid rgba(11,4,21,.2);display:flex;align-items:center;gap:20px 44px;flex-wrap:wrap;}
+  .partners .mono{color:#4b3a6b;width:100%;}
+  .partners img{height:clamp(64px,8vw,92px);width:auto;object-fit:contain;mix-blend-mode:multiply;}
+  .partners img.ridim{height:36px;mix-blend-mode:normal;filter:brightness(0);} */
+  
+  .partners{margin-top:clamp(40px,6vw,72px);padding-top:28px;border-top:1px solid rgba(11,4,21,.2);}
+.partners > .mono{display:block;color:#4b3a6b;margin-bottom:22px;}
+
+.marquee{
+  overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+}
+.marquee-track{
+  background:var(--paper);          /* needed so the logos' white backgrounds blend away */
+  display:flex;align-items:center;
+  width:max-content;
+  animation:marq 34s linear infinite; /* change 34s to speed up or slow down */
+}
+.marquee:hover .marquee-track{animation-play-state:paused;}
+.marquee-set{
+  display:flex;align-items:center;
+  gap:clamp(40px,6vw,72px);
+  padding-right:clamp(40px,6vw,72px);
+}
+@keyframes marq{to{transform:translateX(-50%);}}
+
+.partners img{height:clamp(64px,8vw,92px);width:auto;object-fit:contain;mix-blend-mode:multiply;flex:none;}
+.partners img.ridim{height:36px;mix-blend-mode:normal;filter:brightness(0);}
+.partners img.mamg{height:clamp(56px,6vw,72px);mix-blend-mode:normal;filter:brightness(0);}
+
+  /* ============ FAQ ============ */
+  .faq-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(32px,6vw,90px);align-items:start;}
+  .faq-grid .lead{margin:24px 0 18px;}
+  .faq-link{color:var(--magenta);font-size:14px;font-weight:600;}
+  details{border-top:1px solid var(--line);}
+  details:last-child{border-bottom:1px solid var(--line);}
+  summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 0;font-size:clamp(16px,1.6vw,19px);font-weight:500;}
+  summary::-webkit-details-marker{display:none;}
+  summary::after{content:'+';font-family:var(--mono);font-size:22px;transition:transform .3s var(--ease);}
+  details[open] summary{color:var(--magenta);}
+  details[open] summary::after{transform:rotate(45deg);}
+  details p{color:var(--muted);padding:0 0 24px;max-width:56ch;}
+  details p a{color:var(--text);text-decoration:underline;text-underline-offset:3px;}
+
+  /* ============ FINAL CTA ============ */
+  #final{background:var(--magenta);color:var(--ink);}
+  .final-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(28px,6vw,80px);align-items:end;}
+  #final h2{font-size:clamp(56px,9vw,128px);margin:0;}
+  #final p{font-size:17px;margin-bottom:22px;max-width:36ch;}
+  #final .btn{width:100%;}
+  .socials{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:18px;font-weight:600;font-size:14px;}
+  .socials a{border-bottom:1px solid var(--ink);}
+
+  /* ============ FOOTER ============ */
+  footer{background:var(--bg);padding:56px 0 0;overflow:hidden;}
+  .foot-top{display:grid;grid-template-columns:1.2fr repeat(3,.6fr);gap:32px;}
+  .foot-top p{font-size:15px;}
+  .foot-top .mono{color:var(--muted);margin-top:8px;display:block;}
+  .foot-col h5{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--magenta);margin-bottom:14px;font-weight:700;}
+  .foot-col a{display:block;font-size:14px;padding:4px 0;color:var(--text);opacity:.85;}
+  .foot-col a:hover{opacity:1; color: var(--magenta); text-decoration: underline;}
+  .giant{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin:36px 0 10px;}
+  .giant b{min-width:0;font-family:var(--display);font-weight:400;font-size:clamp(110px,28vw,400px);line-height:.82;letter-spacing:-.01em;text-transform:uppercase;}
+  .giant a{font-family:var(--mono);font-size:clamp(48px,7vw,96px);color:var(--magenta);line-height:1;padding-bottom:20px;transition:transform .3s var(--ease);}
+  .giant a:hover{transform:translate(4px,-6px);}
+  .foot-bottom{border-top:1px solid var(--line);padding:22px 0;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--muted);}
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width:960px){
+    .nav{height:72px;}
+    .nav-logo img{height:44px;}
+    .hero-logo{height:84px;}
+    .nav-links{display:none;}
+    .menu-btn{display:inline-flex;}
+    .nav .btn{display:none;}
+    header.open{background:rgba(9,3,15,.96);}
+    header.open .nav-links{display:flex;flex-direction:column;gap:0;position:absolute;top:72px;left:0;right:0;background:rgba(9,3,15,.96);padding:8px 24px 24px;border-bottom:1px solid var(--line);}
+    header.open .nav-links a{padding:16px 0;border-bottom:1px solid var(--line);font-size:18px;}
+    #hero{padding:100px 0 60px;flex-direction:column;align-items:stretch;justify-content:center;}
+    .hero-grid,.event-card,.about-grid,.past,.paper-grid,.faq-grid,.final-grid{grid-template-columns:1fr;}
+    .hero-poster{justify-self:center;width:min(86%,380px);margin-top:20px;}
+    .hero-foot{position:static;margin-top:36px;}
+    .hero-ctas .btn{flex:1 1 100%;}
+    .date-panel{min-height:0;}
+    .event-info .btn{align-self:stretch;}
+    .foot-top{grid-template-columns:1fr 1fr;}
+    .foot-top > div:first-child{grid-column:1 / -1;}
+    .reel{grid-template-columns:repeat(3,minmax(150px,1fr));overflow-x:auto;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;}
+  
+  .marquee{-webkit-mask-image:none;mask-image:none;}
+.marquee-track{animation:none;width:auto;}
+.marquee-set{flex-wrap:wrap;}
+.marquee-set[aria-hidden]{display:none;}
+
+.strip-track{animation:none;width:auto;}
+.strip-set{flex-wrap:wrap;}
+.strip-set[aria-hidden]{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ SPLASH ============ -->
+<div id="splash" aria-hidden="true">
+  <div class="splash-mark">
+    <img src="images/logo.png" alt="">
+    <div class="splash-bar"></div>
+  </div>
+</div>
+
+<!-- ============ NAV ============ -->
+<header id="siteHeader">
+  <div class="wrap nav">
+    <a class="nav-logo" href="#hero" aria-label="MAMG home"><img src="images/logo.png" alt="MAMG — Me And My Guys"></a>
+    <nav class="nav-links" id="navLinks" aria-label="Main">
+      <a href="#event">The event</a>
+      <a href="#about">What we do</a>
+      <a href="#recap">Last event</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="btn btn-solid" href="https://www.useridim.app/e/meandmyguys-a-day-rave" target="_blank" rel="noopener">Get tickets <span class="arr">↗</span></a>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+    </button>
+  </div>
+</header>
+
+<main>
+<!-- ============ HERO ============ -->
+<section id="hero">
+  <div class="hero-bg" aria-hidden="true">
+    <picture>
+      <source media="(max-width:960px)" srcset="images/hero_mobile2.png">
+      <img src="images/hero_desktop2.png" alt="">
+    </picture>
+  </div>
+  <div class="wrap hero-grid">
+    <div>
+      <!-- <img class="hero-logo" src="images/logo.png" alt="MAMG — Me And My Guys"> -->
+      <p class="hero-tag mono"><i></i>MAMG presents / A day rave / All crews welcome</p>
+      <h1>Me and<br>my guys.</h1>
+      <div class="hero-swipes">
+        <span class="swipe v"><span>December 10th</span></span>
+        <span class="swipe m"><span>Early bird ₦3,500</span></span>
+      </div>
+      <p class="lead">A day rave for you and your crew. Friendship, music and fashion in daylight, with the people you roll with.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-solid" href="https://www.useridim.app/e/meandmyguys-a-day-rave" target="_blank" rel="noopener">Get early bird tickets <span class="arr">↗</span></a>
+        <a class="btn btn-line" href="#recap">See the last event <span class="arr">↓</span></a>
+      </div>
+    </div>
+    <div class="hero-poster">
+      <img src="images/dec10-poster.jpg" alt="Me And My Guys day rave poster: December 10th, early bird tickets ₦3,500, tickets on RIDIM" width="853" height="1280">
+    </div>
+  </div>
+  <div class="hero-foot">
+    <div class="wrap mono">
+      <span>Bring your crew.</span>
+      <a href="#event"><small>Next up / 10 Dec</small>Me And My Guys: A Day Rave ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- <div class="strip">
+  <div class="wrap">
+    <span>Early bird ₦3,500</span>
+    <span>Tickets on RIDIM</span>
+  </div>
+</div> -->
+
+<div class="strip" aria-label="Event highlights">
+  <div class="strip-track">
+
+    <div class="strip-set">
+      <span>Early bird ₦3,500</span>
+      <span>Tickets on RIDIM</span>
+      <span>Dorris O Car park</span>
+      <span>12:00PM - 01:05AM</span>
+      <span>Early bird ₦3,500</span>
+      <span>Tickets on RIDIM</span>
+      <span>Dorris O Car park</span>
+      <span>12:00PM - 01:05AM</span>
+    </div>
+
+    <!-- exact duplicate of the set above, this makes the loop seamless -->
+    <div class="strip-set" aria-hidden="true">
+      <span>Early bird ₦3,500</span>
+      <span>Tickets on RIDIM</span>
+      <span>Dorris O Car park</span>
+      <span>12:00PM - 01:05AM</span>
+      <span>Early bird ₦3,500</span>
+      <span>Tickets on RIDIM</span>
+      <span>Dorris O Car park</span>
+      <span>12:00PM - 01:05AM</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============ NEXT EVENT ============ -->
+<section id="event" class="sec">
+  <div class="wrap">
+    <div class="head-row">
+      <div>
+        <span class="eyebrow">On the radar</span>
+        <h2>Next up.</h2>
+      </div>
+      <p class="lead">One day, one crew, one rave. Lock in your early bird ticket before the price goes up.</p>
+    </div>
+
+    <div class="event-card">
+      <div class="date-panel">
+        <span class="tagline mono">Early bird is live</span>
+        <div class="big-date" aria-label="10 December 2026">
+          <b>10</b>
+          <span>December · Thu · 2026</span>
+        </div>
+        <div class="count-grid" aria-live="off">
+          <div class="count-cell"><span class="count-num" id="cd-days">00</span><span class="count-label">Days</span></div>
+          <div class="count-cell"><span class="count-num" id="cd-hours">00</span><span class="count-label">Hours</span></div>
+          <div class="count-cell"><span class="count-num" id="cd-mins">00</span><span class="count-label">Mins</span></div>
+          <div class="count-cell"><span class="count-num" id="cd-secs">00</span><span class="count-label">Secs</span></div>
+        </div>
+      </div>
+      <div class="event-info">
+        <h3>Me And My Guys:<br>A Day Rave</h3>
+        <p>Come with your people, dress to be seen, and spend the day with good music and good company.</p>
+        <dl class="facts">
+          <div><dt>When</dt><dd>10 Dec 2026</dd></div>
+          <div><dt>Where</dt><dd>Doris O hotel Car Park</dd></div>
+          <div><dt>Time</dt><dd>12:00PM - 1:05AM</dd></div>
+          <div><dt>Tickets</dt><dd>RIDIM</dd></div>
+        </dl>
+        <div class="price-pill">
+          <strong>₦3,500</strong>
+          <span class="mono">Early bird ticket</span>
+        </div>
+        <a class="btn btn-solid" href="https://www.useridim.app/e/meandmyguys-a-day-rave" target="_blank" rel="noopener">Get early bird tickets <span class="arr">↗</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section id="about" class="sec">
+  <div class="wrap about-grid">
+    <div>
+      <span class="eyebrow">What we do</span>
+      <h2>Find your people.</h2>
+      <p class="lead">MAMG (Me And My Guys) is more than an event brand. It's a community built on friendship, connection and unforgettable experiences.</p>
+    </div>
+    <ul class="rows">
+      <li><h3>Raves</h3><p>Loud, bright and made for the whole crew.</p><span class="tick">↗</span></li>
+      <li><h3>Day parties</h3><p>Daylight, good music and no reason to leave early.</p><span class="tick">↗</span></li>
+      <li><h3>Hangouts</h3><p>Easy time with the people you roll with.</p><span class="tick">↗</span></li>
+      <li><h3>Pop-ups</h3><p>MAMG lands in a city, then moves on to the next.</p><span class="tick">↗</span></li>
+      <li><h3>Trips &amp; more</h3><p>Experiences that take the crew past the usual.</p><span class="tick">↗</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ LAST EVENT RECAP ============ -->
+<section id="recap" class="sec" style="background:var(--bg-2);">
+  <div class="wrap">
+    <div class="head-row">
+      <div>
+        <span class="eyebrow">Last event</span>
+        <h2>Show up &amp;<br>show off.</h2>
+      </div>
+      <p class="lead">Calabar's first day rave and the first MAMG activation in the city. Here's how it looked.</p>
+    </div>
+
+    <div class="past">
+      <div class="past-img">
+        <span class="mono">Past event / #SUSO</span>
+        <img src="images/flyer.jpg" alt="Show Up and Show Off day rave flyer, 25 September, Garden's Lounge Car Park, Calabar" loading="lazy">
+      </div>
+      <div class="past-info">
+        <h3>#SUSO<br>Day Rave</h3>
+        <p>MAMG's first stop in Calabar. Crews showed up, showed off, and took over the car park for the day.</p>
+        <dl class="facts">
+          <div><dt>When</dt><dd>25 Sept 2026</dd></div>
+          <div><dt>Where</dt><dd>Garden's Lounge Car Park, Calabar</dd></div>
+          <div><dt>Ticket partner</dt><dd>RIDIM</dd></div>
+          <div><dt>Hashtag</dt><dd>#SUSO Day Rave</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <!-- gallery -->
+    <div class="sub-head">
+      <h3>The moments</h3>
+      <span class="mono" style="color:var(--muted)">Swipe or tap through</span>
+    </div>
+    <div class="cf-stage" id="cfStage">
+      <div class="cf-item"><img src="images/gallery1.jpg" alt="Guy posing with the 25th September sign" loading="lazy"></div>
+      <div class="cf-item"><img src="images/gallery2.jpg" alt="Guest posing in the garden" loading="lazy"></div>
+      <div class="cf-item"><img src="images/gallery3.jpg" alt="Two friends at the day rave" loading="lazy"></div>
+      <div class="cf-item"><img src="images/gallery4.jpg" alt="Two guys holding the 25th September and #SUSO Day Rave signs" loading="lazy"></div>
+      <div class="cf-item"><img src="images/gallery5.jpg" alt="Two girls holding the 25th September and Day Rave signs" loading="lazy"></div>
+      <!-- <div class="cf-item"><img src="images/gallery6.jpg" alt="Two guests holding event signs at night" loading="lazy"></div>
+      <div class="cf-item"><img src="images/gallery7.jpg" alt="Three friends with #SUSO Day Rave signs" loading="lazy"></div>
+      <div class="cf-item"><img src="images/gallery8.jpg" alt="A group posing in the garden" loading="lazy"></div>
+      <div class="cf-item"><img src="images/gallery9.jpg" alt="A crew of guests showing up and showing off" loading="lazy"></div>
+     --></div>
+    <div class="cf-nav">
+      <button class="cf-arrow" id="cfPrev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <div class="cf-dots" id="cfDots"></div>
+      <button class="cf-arrow" id="cfNext" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
+    </div>
+
+    <!-- experiences -->
+    <!-- <div class="exp-block">
+      <div class="sub-head">
+        <h3>What was there</h3>
+        <span class="mono" style="color:var(--muted)">Five set pieces for the crew</span>
+      </div> -->
+      <!-- <div class="exp-track">
+        <figure class="exp-card"><img src="images/tts2.jpg" alt="Cocktail bar" loading="lazy"><h4>Cocktail bar</h4></figure>
+        <figure class="exp-card"><img src="images/tts3.jpg" alt="Photo booth" loading="lazy"><h4>Photo booth</h4></figure>
+        <figure class="exp-card"><img src="images/tts4.jpg" alt="360 booth" loading="lazy"><h4>360 booth</h4></figure>
+        <figure class="exp-card"><img src="images/tts5.jpg" alt="Confession wall" loading="lazy"><h4>Confession wall</h4></figure>
+        <figure class="exp-card"><img src="images/tts6.jpg" alt="Tattoo booth" loading="lazy"><h4>Tattoo booth</h4></figure>
+      </div> 
+    </div>-->
+
+    <!-- reel -->
+    <div class="reel-block">
+      <div class="sub-head">
+        <h3>From the feed</h3>
+        <a class="faq-link" href="https://www.instagram.com/mamg_africa?igsi=MWJ0eGJuZjBtdnV5Mw==" target="_blank" rel="noopener">More on @MAMG_Africa ↗</a>
+      </div>
+      <div class="reel">
+        <video controls playsinline preload="none" poster="images/reel-1.jpg"><source src="images/reel-1.mp4" type="video/mp4"></video>
+        <video controls playsinline preload="none" poster="images/reel-2.jpg"><source src="images/reel-2.mp4  " type="video/mp4"></video>
+       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PAPER BAND: statement, numbers, partners ============ -->
+<section id="paper" class="sec">
+  <div class="wrap">
+    <div class="paper-grid">
+      <div>
+        <span class="eyebrow">Why MAMG</span>
+        <p class="quote">Life is better when we do it together.</p>
+        <p class="quote-by">MAMG · Me And My Guys</p>
+      </div>
+      <div>
+        <div class="stat"><b>1st</b><span>MAMG stop in Calabar</span></div>
+        <div class="stat"><b>5</b><span>Set pieces at the last day rave</span></div>
+        <div class="stat" style="margin-bottom:0"><b>12</b><span>Partners behind the last event</span></div>
+      </div>
+    </div>
+    <!-- <div class="partners">
+      <span class="mono">In good company</span>
+      <img class="ridim" src="images/logo.png" alt="MAMG" loading="lazy">
+      <img class="ridim" src="images/ridim_logo.png" alt="RIDIM" loading="lazy">
+      <img src="images/garden_lounge_sponsor.jpg" alt="Garden's Lounge" loading="lazy">
+      <img src="images/tk_sponsor.jpg" alt="TK Atelier" loading="lazy">
+      <img src="images/istore_sponsor.jpg" alt="iStore Calabar" loading="lazy">
+      <img src="images/chainah_sponsor.jpg" alt="Chainah Tattoo Zone" loading="lazy">
+      <img src="images/everything_event_sponsor.jpg" alt="Everything Event" loading="lazy">
+    </div> -->
+    <div class="partners">
+  <span class="mono">In good company</span>
+  <div class="marquee" aria-label="Our partners">
+    <div class="marquee-track">
+
+      <div class="marquee-set">
+        <img class="mamg" src="images/logo.png" alt="MAMG">
+        <img class="ridim" src="images/ridim_logo.png" alt="RIDIM">
+        <img src="images/garden_lounge_sponsor.jpg" alt="Garden's Lounge">
+        <img src="images/tk_sponsor.jpg" alt="TK Atelier">
+        <img src="images/istore_sponsor.jpg" alt="iStore Calabar">
+        <img src="images/chainah_sponsor.jpg" alt="Chainah Tattoo Zone">
+        <img src="images/everything_event_sponsor.jpg" alt="Everything Event">
+      </div>
+
+      <!-- exact duplicate of the set above, this is what makes the loop seamless -->
+      <div class="marquee-set" aria-hidden="true">
+        <img class="mamg" src="images/logo.png" alt="">
+        <img class="ridim" src="images/ridim_logo.png" alt="">
+        <img src="images/garden_lounge_sponsor.jpg" alt="">
+        <img src="images/tk_sponsor.jpg" alt="">
+        <img src="images/istore_sponsor.jpg" alt="">
+        <img src="images/chainah_sponsor.jpg" alt="">
+        <img src="images/everything_event_sponsor.jpg" alt="">
+      </div>
+
+    </div>
+  </div>
+</div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq" class="sec">
+  <div class="wrap faq-grid">
+    <div>
+      <span class="eyebrow">A few things to know</span>
+      <h2>Before you head out.</h2>
+      <p class="lead">The basics on the day rave and on MAMG.</p>
+      <a class="faq-link" href="https://www.instagram.com/mamg_africa?igsi=MWJ0eGJuZjBtdnV5Mw==" target="_blank" rel="noopener">Still wondering? Message @MAMG_Africa ↗</a>
+    </div>
+    <div>
+      <details open>
+        <summary>How do I get tickets for 10 December?</summary>
+        <p>Tickets are on RIDIM. Early bird is ₦3,500. <a href="https://www.useridim.app/e/meandmyguys-a-day-rave" target="_blank" rel="noopener">Get your ticket</a>.</p>
+      </details>
+      <details>
+        <summary>What is MAMG?</summary>
+        <p>MAMG (Me And My Guys) is more than an event brand. It's a community built on friendship, connection and unforgettable experiences.</p>
+      </details>
+      <details>
+        <summary>So, is MAMG just a party?</summary>
+        <p>Nope! Parties are part of what we do, but MAMG is bigger than that. We create spaces for people to connect, vibe and build real memories together.</p>
+      </details>
+      <details>
+        <summary>Who is MAMG for?</summary>
+        <p>MAMG is for everyone who believes good experiences are better together. Your friends, your people and even the new ones you haven't met yet. If you like good vibes, you're already one of us.</p>
+      </details>
+      <details>
+        <summary>Why “Me and My Guys”?</summary>
+        <p>Because life is better when we do it together. MAMG is about the people you roll with, the bond you share and the memories you create.</p>
+      </details>
+      <details>
+        <summary>What does MAMG actually do?</summary>
+        <p>We create experiences that bring people together: raves, day parties, hangouts, pop-ups, trips and more. It's not just about the event, it's about the impact.</p>
+      </details>
+      <details>
+        <summary>What kind of experiences can I expect?</summary>
+        <p>Good vibes. Good people. Good music. Real connections. Every MAMG experience is curated to make sure you leave with stories worth telling and people worth calling your own.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section id="final" class="sec">
+  <div class="wrap final-grid">
+    <h2>See you<br>on the 10th.</h2>
+    <div>
+      <p>Early bird tickets are ₦3,500 on RIDIM. Bring your guys.</p>
+      <a class="btn btn-dark" href="https://www.useridim.app/e/meandmyguys-a-day-rave" target="_blank" rel="noopener">Get early bird tickets <span class="arr">↗</span></a>
+      <div class="socials">
+        <a href="https://www.instagram.com/mamg_africa?igsi=MWJ0eGJuZjBtdnV5Mw==" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.tiktok.com/@meandmyguys_africa?_r=1&amp;_t=ZS-99TbCwEXASC" target="_blank" rel="noopener">TikTok</a>
+        <a href="https://chat.whatsapp.com/JMTuujyLznB3xa2h6bAILS?mode=gi_t" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <p>For the crews that make the memories.</p>
+        <span class="mono">Pop-up culture, one city at a time</span>
+      </div>
+      <div class="foot-col">
+        <h5>Explore</h5>
+        <a href="#event">The event</a>
+        <a href="#about">What we do</a>
+        <a href="#recap">Last event</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="foot-col">
+        <h5>Tickets</h5>
+        <a href="https://www.useridim.app/e/meandmyguys-a-day-rave" target="_blank" rel="noopener">Early bird on RIDIM</a>
+        <a href="tel:09044355752">09044355752</a>
+      </div>
+      <div class="foot-col">
+        <h5>Follow</h5>
+        <a href="https://www.instagram.com/mamg_africa?igsi=MWJ0eGJuZjBtdnV5Mw==" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i> @MAMG_Africa</a>
+        <a href="https://www.tiktok.com/@meandmyguys_africa?_r=1&amp;_t=ZS-99TbCwEXASC" target="_blank" rel="noopener">TikTok</a>
+        <a href="https://www.facebook.com/share/18Te9BjKJB/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://www.snapchat.com/add/mamg_africa?share_id=S5Zmw7yi_To&amp;locale=en-US" target="_blank" rel="noopener">Snapchat</a>
+        <a href="https://chat.whatsapp.com/JMTuujyLznB3xa2h6bAILS?mode=gi_t" target="_blank" rel="noopener">WhatsApp community</a>
+      </div>
+    </div>
+    <div class="giant" aria-hidden="true">
+      <b>MAMG</b>
+      <a href="#hero" tabindex="-1">↗</a>
+    </div>
+    <div class="foot-bottom mono">
+      <span>© 2026 MAMG · Me And My Guys</span>
+      <a href="#hero">Back to top ↑</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* ---------- Splash (3s) ---------- */
+  var splash = document.getElementById('splash');
+  window.addEventListener('load', function(){ setTimeout(function(){ splash.classList.add('hide'); }, 3000); });
+
+  /* ---------- Header ---------- */
+  var header = document.getElementById('siteHeader');
+  var menuBtn = document.getElementById('menuBtn');
+  function onScroll(){ header.classList.toggle('scrolled', window.scrollY > 40); }
+  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+  menuBtn.addEventListener('click', function(){
+    var open = header.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  document.querySelectorAll('#navLinks a').forEach(function(a){
+    a.addEventListener('click', function(){ header.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false'); });
+  });
+
+  /* ---------- Countdown to 10 December 2026 (00:00, Nigeria time) ---------- */
+  var target = new Date('2026-12-10T00:00:00+01:00').getTime();
+  var els = {d:document.getElementById('cd-days'), h:document.getElementById('cd-hours'), m:document.getElementById('cd-mins'), s:document.getElementById('cd-secs')};
+  function pad(n){ return String(n).padStart(2,'0'); }
+  function tick(){
+    var diff = Math.max(0, target - Date.now());
+    els.d.textContent = pad(Math.floor(diff / 86400000));
+    els.h.textContent = pad(Math.floor(diff % 86400000 / 3600000));
+    els.m.textContent = pad(Math.floor(diff % 3600000 / 60000));
+    els.s.textContent = pad(Math.floor(diff % 60000 / 1000));
+  }
+  tick(); setInterval(tick, 1000);
+
+  /* ---------- Gallery coverflow ---------- */
+  var stage = document.getElementById('cfStage');
+  var items = Array.prototype.slice.call(stage.querySelectorAll('.cf-item'));
+  var dotsWrap = document.getElementById('cfDots');
+  var n = items.length, active = 0, timer = null;
+  items.forEach(function(_, i){
+    var d = document.createElement('div');
+    d.className = 'cf-dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', function(){ go(i); restart(); });
+    dotsWrap.appendChild(d);
+  });
+  var dots = Array.prototype.slice.call(dotsWrap.children);
+  function shortest(i){ var d = i - active; if (d > n/2) d -= n; if (d < -n/2) d += n; return d; }
+  function render(){
+    var gap = stage.clientWidth < 600 ? 92 : 190;
+    items.forEach(function(item, i){
+      var diff = shortest(i), abs = Math.abs(diff);
+      item.classList.toggle('is-active', diff === 0);
+      if (abs > 3){
+        item.style.opacity = '0'; item.style.pointerEvents = 'none';
+        item.style.transform = 'translateX(' + (diff > 0 ? 1 : -1) * 900 + 'px) scale(.5)';
+        return;
+      }
+      item.style.pointerEvents = 'auto';
+      item.style.transform = 'translateX(' + diff * gap + 'px) scale(' + (1 - abs * .14) + ') rotateY(' + (diff * -22) + 'deg)';
+      item.style.zIndex = n - abs;
+      item.style.opacity = String(1 - abs * .28);
+      item.style.filter = diff === 0 ? 'brightness(1)' : 'brightness(.55)';
+    });
+    dots.forEach(function(d, i){ d.classList.toggle('active', i === active); });
+  }
+  function go(i){ active = (i + n) % n; render(); }
+  function restart(){ clearInterval(timer); timer = setInterval(function(){ go(active + 1); }, 2800); }
+  document.getElementById('cfNext').addEventListener('click', function(){ go(active + 1); restart(); });
+  document.getElementById('cfPrev').addEventListener('click', function(){ go(active - 1); restart(); });
+  items.forEach(function(item, i){ item.addEventListener('click', function(){ go(i); restart(); }); });
+  var dragging = false, startX = 0;
+  stage.addEventListener('pointerdown', function(e){ dragging = true; startX = e.clientX; clearInterval(timer); });
+  window.addEventListener('pointerup', function(e){
+    if (!dragging) return; dragging = false;
+    var dx = e.clientX - startX;
+    if (dx > 40) go(active - 1); else if (dx < -40) go(active + 1);
+    restart();
+  });
+  stage.addEventListener('mouseenter', function(){ clearInterval(timer); });
+  stage.addEventListener('mouseleave', function(){ if (!dragging) restart(); });
+  window.addEventListener('resize', render);
+  render(); restart();
+
+  /* ---------- Only one reel video plays at a time ---------- */
+  var vids = Array.prototype.slice.call(document.querySelectorAll('.reel video'));
+  vids.forEach(function(v){
+    v.addEventListener('play', function(){ vids.forEach(function(o){ if (o !== v) o.pause(); }); });
+  });
+})();
+</script>
+</body>
+</html>
